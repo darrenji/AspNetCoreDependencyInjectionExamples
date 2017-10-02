@@ -7,11 +7,11 @@ namespace AspNetCoreDependencyInjectionExamples.Models
 {
     public class MemoryRepository : IRepository
     {
-        private Dictionary<string, Product> products;
+        private IModelStorage storage;
 
-        public MemoryRepository()
+        public MemoryRepository(IModelStorage modelStore)
         {
-            products = new Dictionary<string, Product>();
+            storage = modelStore;
 
             new List<Product>
             {
@@ -24,7 +24,7 @@ namespace AspNetCoreDependencyInjectionExamples.Models
         {
             get
             {
-                return products[name];
+                return storage[name];
             }
         }
 
@@ -32,18 +32,18 @@ namespace AspNetCoreDependencyInjectionExamples.Models
         {
             get
             {
-                return products.Values;
+                return storage.Items;
             }
         }
 
         public void AddProduct(Product product)
         {
-            products[product.Name] = product;
+            storage[product.Name] = product;
         }
 
         public void DeleteProduct(Product product)
         {
-            products.Remove(product.Name);
+            storage.RemoveItem(product.Name);
         }
     }
 }

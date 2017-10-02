@@ -12,11 +12,29 @@ namespace AspNetCoreDependencyInjectionExamples.Controllers
 {
     public class HomeController : Controller
     {
-        public IRepository Repository { get; set; } = TypeBroker.Repository;
-        // GET: /<controller>/
-        public IActionResult Index()
-        {
-            return View(Repository.Products);
-        }
+        //private IRepository repository;
+        //private ProductTotalizer totalizer;
+
+        //public HomeController(IRepository repo, ProductTotalizer total)
+        //{
+        //    repository = repo;
+        //    totalizer = total;
+        //}
+
+        ////public IRepository Repository { get; set; } = TypeBroker.Repository;
+        //// GET: /<controller>/
+        //public IActionResult Index()
+        //{
+        //    //return View(Repository.Products);
+        //    ViewBag.Total = totalizer.Total;
+        //    return View(repository.Products);
+        //}
+
+
+        //直接在Action中使用依赖倒置
+        //public ViewResult Index([FromServices]ProductTotalizer totalizer)
+        //{
+        //    IRepository repository = HttpContext.RequestServices.GetService<IRepository>();
+        //}
     }
 }

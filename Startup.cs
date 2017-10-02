@@ -18,7 +18,10 @@ namespace AspNetCoreDependencyInjectionExamples
         // For more information on how to configure your application, visit http://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            TypeBroker.SetRepositoryType<AlternateRepository>();
+            //TypeBroker.SetRepositoryType<AlternateRepository>();
+            services.AddTransient<IRepository, MemoryRepository>();
+            services.AddTransient<IModelStorage, DictionaryStorage>();
+            services.AddTransient<ProductTotalizer>();
             services.AddMvc();
         }
 
